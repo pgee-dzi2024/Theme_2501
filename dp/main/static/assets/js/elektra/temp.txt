@@ -1,0 +1,37 @@
+            axios.get('/diki/api/theme_items/'+theme_num_id)
+                .then(function(response){
+                    vm.test = response.data;
+                    vm.timer.s = 0
+                    //тука трябва да се генерира тест
+                    for(item of vm.test){ // премахвам групираните въпроси ако е възможно
+                        vm.removeGroup(item.tasks_knowledge, item.knowledge)
+                        vm.removeExtraTasks(item.tasks_knowledge, item.knowledge)
+                        vm.removeGroup(item.tasks_comprehension, item.comprehension)
+                        vm.removeExtraTasks(item.tasks_comprehension, item.comprehension)
+                        vm.removeGroup(item.tasks_application, item.application)
+                        vm.removeExtraTasks(item.tasks_application, item.application)
+                        vm.removeGroup(item.tasks_analysis, item.analysis)
+                        vm.removeExtraTasks(item.tasks_analysis, item.analysis)
+                    }
+                    // номерирам въпросите
+                    let num = 1
+                    for(item of vm.test){
+                        for (task of item.tasks_knowledge){
+                            task.num = num
+                            num +=1
+                        }
+                        for (task of item.tasks_comprehension){
+                            task.num = num
+                            num +=1
+                        }
+                        for (task of item.tasks_application){
+                            task.num = num
+                            num +=1
+                        }
+                        for (task of item.tasks_analysis){
+                            task.num = num
+                            num +=1
+                        }
+                    }
+                    vm.timer.id = setInterval(vm.testTimer, 1000)
+                })

@@ -1,0 +1,36 @@
+{% load static %}
+            <!-- Begin Left panel -->
+            <div class="rbt-left-panel popup-dashboardleft-section">
+                <div class="rbt-default-sidebar">
+                    <div class="inner">
+                        <div class="content-item-content">
+                            <div class="rbt-default-sidebar-wrapper">
+                                <nav class="mainmenu-nav">
+                                    <ul class="dashboard-mainmenu rbt-default-sidebar-list">
+                                        <li>ПРОФЕСИОНАЛНА ГИМНАЗИЯ ПО ЕЛЕКТРОНИКА И ЕНЕРГЕТИКА</li>
+                                   </ul>
+                                    <div class="rbt-sm-separator"></div>
+                                </nav>
+
+                                <div class="rbt-sm-separator"></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <div class="subscription-box">
+                        <div class="inner">
+                            <a href="profile-details.html" class="autor-info">
+                                <p>Потребител:</p>
+                                <div class="author-desc" style="padding-left: 20px;">
+                                    <p style="font-size: 12px;">{{ user_name }}</p>
+                                    <p style="font-size: 10px;">{{ user_level }}</p>
+                                    <p style="font-size: 10px;">Влязъл като <span style="font-weight: 500;">"{{ user_nick }}"</span></p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <p class="subscription-copyright copyright-text text-center b4  small-text">Мирослава Тодева©Банско 2025</p>
+                </div>
+            </div>
+            <!-- End Left panel -->

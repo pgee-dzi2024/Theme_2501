@@ -1,0 +1,72 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block left_panel_icon %}
+                                    <button class="bg-solid-primary popup-dashboardleft-btn">
+                                        <i class="feather-sidebar left"></i>
+                                    </button>
+{% endblock %}
+
+{% block left_panel %}
+{% include 'main/left_panel_profile.html' %}
+{% endblock %}
+
+{% block main_content %}
+            <!-- Main content -->
+            <div class="rbt-main-content mr--0">
+                <div class="rbt-daynamic-page-content">
+                    <!-- Start Breadcarumb area  -->
+                    <div class="chatenai-separator">
+                        <img class="w-100 separator-dark"
+                             src="{% static 'assets/images/separator/separator-top.svg' %}" alt="separator">
+                        <img class="w-100 separator-light"
+                             src="{% static 'assets/images/light/separator/separator-top.svg' %}" alt="separator">
+                    </div>
+                    <div class="breadcrumb-area breadcarumb-style1 pt--30 pb--30">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12">
+                        <div class="inner text-center mt--30">
+                            <h1 class="title display-one">Демонстрационна система<br>
+                                <span class="color-off">регистрация и вход на потребители</span>
+                            </h1>
+                            <p class="b1 desc-text">системата включва управление на роли и права за достъп до различни ресурси</p>
+                            <p class="color-gray mt--5"><br></p>
+                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Breadcarumb area  -->
+                    <div class="chatenai-separator">
+                        <img class="w-100 separator-dark" src="{% static 'assets/images/separator/separator-bottom.svg' %}" alt="separator">
+                        <img class="w-100 separator-light" src="{% static 'assets/images/light/separator/separator-bottom.svg' %}" alt="separator">
+                    </div>
+
+                    <!-- Dashboard Center Content -->
+                    <div class="rbt-dashboard-content">
+                        <div class="content-page">
+                        </div>
+                        <div class="rbt-static-bar collapse-width">
+                            <!-- End Header Top Area  -->
+                            <div id="my_switcher" class="my_switcher">
+                                <ul>
+                                    <li>
+                                        <a href="javascript: void(0);" data-theme="light" class="setColor light">
+                                            <img src="{% static 'assets/images/light/switch/sun-01.svg' %}" alt="Sun images"><span title="Light Mode"> Light</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript: void(0);" data-theme="dark" class="setColor dark">
+                                            <img src="{% static 'assets/images/light/switch/vector.svg' %}" alt="Vector Images"><span title="Dark Mode">
+                                        Dark</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}
+

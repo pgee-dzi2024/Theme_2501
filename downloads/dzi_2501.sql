@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Време на генериране: 31 март 2025 в 19:43
+-- Време на генериране: 12 апр 2025 в 21:39
 -- Версия на сървъра: 10.4.32-MariaDB
 -- Версия на PHP: 8.2.12
 
@@ -85,7 +85,11 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (21, 'Can add session', 6, 'add_session'),
 (22, 'Can change session', 6, 'change_session'),
 (23, 'Can delete session', 6, 'delete_session'),
-(24, 'Can view session', 6, 'view_session');
+(24, 'Can view session', 6, 'view_session'),
+(25, 'Can add Пофил на потребител', 7, 'add_userprofile'),
+(26, 'Can change Пофил на потребител', 7, 'change_userprofile'),
+(27, 'Can delete Пофил на потребител', 7, 'delete_userprofile'),
+(28, 'Can view Пофил на потребител', 7, 'view_userprofile');
 
 -- --------------------------------------------------------
 
@@ -112,7 +116,7 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$600000$52JSVtdpAS6XzN5GdVB6Tj$P84hHYeWbFWlWlDGh1kIrSVzjsXoqlY5dmCbTJP87QI=', NULL, 1, 'dzi_25', '', '', '', 1, 1, '2025-03-31 17:42:52.119887');
+(1, 'pbkdf2_sha256$600000$52JSVtdpAS6XzN5GdVB6Tj$P84hHYeWbFWlWlDGh1kIrSVzjsXoqlY5dmCbTJP87QI=', '2025-04-12 19:27:52.342346', 1, 'dzi_25', '', '', '', 1, 1, '2025-03-31 17:42:52.119887');
 
 -- --------------------------------------------------------
 
@@ -177,6 +181,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (2, 'auth', 'permission'),
 (4, 'auth', 'user'),
 (5, 'contenttypes', 'contenttype'),
+(7, 'main', 'userprofile'),
 (6, 'sessions', 'session');
 
 -- --------------------------------------------------------
@@ -214,7 +219,8 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (15, 'auth', '0010_alter_group_name_max_length', '2025-03-31 17:42:13.181786'),
 (16, 'auth', '0011_update_proxy_permissions', '2025-03-31 17:42:13.191878'),
 (17, 'auth', '0012_alter_user_first_name_max_length', '2025-03-31 17:42:13.207783'),
-(18, 'sessions', '0001_initial', '2025-03-31 17:42:13.240926');
+(18, 'sessions', '0001_initial', '2025-03-31 17:42:13.240926'),
+(19, 'main', '0001_initial', '2025-04-12 12:08:19.336484');
 
 -- --------------------------------------------------------
 
@@ -226,6 +232,29 @@ CREATE TABLE `django_session` (
   `session_key` varchar(40) NOT NULL,
   `session_data` longtext NOT NULL,
   `expire_date` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Схема на данните от таблица `django_session`
+--
+
+INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('pdaqcwmyrbyv4io1wr6a00phmvty3wxq', 'e30:1u3gVx:4HdBIuSyFP5jZGHivt22oPdPGBFyw62vobsCmB6q3Fc', '2025-04-26 19:27:41.427382'),
+('w8cgcti7om15jbif31s9tf0gfunk15cs', 'e30:1u3gW8:USWOXp1d4U7PJ3xCUnKvMPWjo0McxRcC8GO-yVJIoCE', '2025-04-26 19:27:52.327071'),
+('zdtvnvej1ychwbemmsn87c3lq3g7bps3', '.eJxVjMsOwiAQRf-FtSE8R3Dpvt9AhgGkaiAp7cr479qkC93ec859sYDbWsM28hLmxC5MstPvFpEeue0g3bHdOqfe1mWOfFf4QQefesrP6-H-HVQc9Vufk_RIQkFBa7REcMoXkTRkAEfWC-Vk9IiAGoCys1ScTSRMjlK4aNj7A9MgN6M:1tzWi9:EQEz1XBlaOIP6f6C6cGNCMNUEI0FNbied7Dz9xBjUKs', '2025-04-15 08:11:05.968067');
+
+-- --------------------------------------------------------
+
+--
+-- Структура на таблица `main_userprofile`
+--
+
+CREATE TABLE `main_userprofile` (
+  `id` bigint(20) NOT NULL,
+  `gender` tinyint(1) NOT NULL,
+  `access_level` smallint(5) UNSIGNED NOT NULL CHECK (`access_level` >= 0),
+  `session_theme` smallint(5) UNSIGNED NOT NULL CHECK (`session_theme` >= 0),
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -306,6 +335,13 @@ ALTER TABLE `django_session`
   ADD KEY `django_session_expire_date_a5c62663` (`expire_date`);
 
 --
+-- Индекси за таблица `main_userprofile`
+--
+ALTER TABLE `main_userprofile`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user_id` (`user_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -325,7 +361,7 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `auth_user`
@@ -355,13 +391,19 @@ ALTER TABLE `django_admin_log`
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `main_userprofile`
+--
+ALTER TABLE `main_userprofile`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- Ограничения за дъмпнати таблици
@@ -400,6 +442,12 @@ ALTER TABLE `auth_user_user_permissions`
 ALTER TABLE `django_admin_log`
   ADD CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   ADD CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
+
+--
+-- Ограничения за таблица `main_userprofile`
+--
+ALTER TABLE `main_userprofile`
+  ADD CONSTRAINT `main_userprofile_user_id_15c416f4_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
