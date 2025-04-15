@@ -1,0 +1,138 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block left_panel_icon %}
+<button class="bg-solid-primary popup-dashboardleft-btn" xmlns="http://www.w3.org/1999/html">
+                                        <i class="feather-sidebar left"></i>
+                                    </button>
+{% endblock %}
+
+{% block left_panel %}
+{% include 'main/left_panel_profile.html' %}
+{% endblock %}
+
+{% block main_content %}
+            <!-- Main content -->
+            <div class="rbt-main-content mr--0">
+                <div class="rbt-daynamic-page-content">
+                    <!-- Start Breadcarumb area  -->
+                    <div class="chatenai-separator">
+                        <img class="w-100 separator-dark"
+                             src="{% static 'assets/images/separator/separator-top.svg' %}" alt="separator">
+                        <img class="w-100 separator-light"
+                             src="{% static 'assets/images/light/separator/separator-top.svg' %}" alt="separator">
+                    </div>
+                    <div class="breadcrumb-area breadcarumb-style1 pt--30 pb--30">
+                    <div class="rbt-dashboard-content">
+                        <div class="content-page">
+                            <div class="chat-box-list pt--30">
+                                <form>
+                                    <h5 class="title">
+                                        Потребител #{{ user.id }}</h5>
+                                    <!-- роля -->
+                                    <div class="row">
+                                        <div class="form-group col-lg-6 col-md-6 col-sm-12 col-6"></div>
+                                        <div class="custom-control col-lg-2 align-items-end">
+                                            Роля:
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12 col-6"></div>
+                                        <div class="custom-control custom-checkbox col-lg-2 align-items-end">
+                                            <input class="custom-control-input" id="editА" type="radio" name="r1">
+                                            <label class="custom-control-label d-flex align-items-center" for="editА">Администратор</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox col-lg-2 align-items-end">
+                                            <input class="custom-control-input" id="editT" type="radio" name="r1">
+                                            <label class="custom-control-label d-flex align-items-center" for="editT">Учител</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox col-lg-2 align-items-end">
+                                            <input class="custom-control-input" id="editS" type="radio" name="r1">
+                                            <label class="custom-control-label d-flex align-items-center" for="editS">Ученик</label>
+                                        </div>
+                                    </div>
+                                    <!-- Потребителско име -->
+                                    <div class="row">
+                                        <div class="form-group col-12">
+                                            <label for="editUserName">Потребителско име: </label>
+                                            <input type="text" class="form-control"
+                                                   id="editUserName" maxlength="20" size="20" v-model="c_user.username">
+                                        </div>
+                                    </div>
+                                    <!-- Име и фамилия -->
+                                    <div class="row">
+                                        <div class="form-group col-lg-6 col-md-6 col-sm-12 col-6">
+                                            <label for="editFirstName">Име: </label>
+                                            <input type="text" class="form-control"
+                                                   id="editFirstName" maxlength="20" size="20" v-model="c_user.first_name">
+                                        </div>
+                                        <div class="form-group col-lg-6 col-md-6 col-sm-12 col-6">
+                                            <label for="editLastName">Фамилия: </label>
+                                            <input type="text" class="form-control"
+                                                   id="editLastName" maxlength="40" size="20" v-model="c_user.last_name">
+                                        </div>
+                                    </div>
+                                    <!-- e-mail и пол -->
+                                    <div class="row">
+                                        <div class="form-group col-lg-6 col-md-6 col-sm-12 col-6">
+                                            <label for="editEmail">Електронна поща: </label>
+                                            <input type="email" class="form-control"
+                                                   id="editEmail" maxlength="40" size="20" v-model="c_user.email">
+                                        </div>
+                                        <div class="custom-control col-lg-2 align-items-end">
+                                            Пол:
+                                        </div>
+                                        <div class="custom-control custom-checkbox col-lg-2 align-items-end cb-ok-align">
+                                            <input class="custom-control-input" id="editGM" type="radio" name="a1">
+                                            <label class="custom-control-label d-flex align-items-center" for="editGM">мъж</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox col-lg-2 align-items-end cb-ok-align">
+                                            <input class="custom-control-input" id="editGF" type="radio" name="a1">
+                                            <label class="custom-control-label d-flex align-items-center" for="editGF">жена</label>
+                                        </div>
+                                    </div>
+                                    <!-- footer - бутони за отказ/запис -->
+                                    <div class="row mt--20">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="text-align: center;">
+                                            <div class="btn-grp">
+                                                <button class="react-btn btn-default btn-small btn-border bg-color-success">
+                                                   <i class="feather-check"></i><span>&nbsp;Запази</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Breadcarumb area  -->
+                    <div class="chatenai-separator">
+                        <img class="w-100 separator-dark" src="{% static 'assets/images/separator/separator-bottom.svg' %}" alt="separator">
+                        <img class="w-100 separator-light" src="{% static 'assets/images/light/separator/separator-bottom.svg' %}" alt="separator">
+                    </div>
+
+                    <!-- Dashboard Center Content -->
+                    <div class="rbt-dashboard-content">
+                        <div class="content-page"></div>
+                        <div class="rbt-static-bar collapse-width">
+                            <!-- End Header Top Area  -->
+                            <div id="my_switcher" class="my_switcher">
+                                <ul>
+                                    <li>
+                                        <a href="javascript: void(0);" data-theme="light" class="setColor light">
+                                            <img src="{% static 'assets/images/light/switch/sun-01.svg' %}" alt="Sun images"><span title="Light Mode"> Light</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript: void(0);" data-theme="dark" class="setColor dark">
+                                            <img src="{% static 'assets/images/light/switch/vector.svg' %}" alt="Vector Images"><span title="Dark Mode">
+                                        Dark</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+{% endblock %}
+

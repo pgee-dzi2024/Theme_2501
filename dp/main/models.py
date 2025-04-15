@@ -28,9 +28,6 @@ class UserProfile(models.Model):
     gender = models.BooleanField('Пол', default=True, choices=[(True, 'мъж'), (False, 'жена'), ] )
     access_level = models.PositiveSmallIntegerField('Роля', choices=USER_LEVEL, default=STUDENT,
                                                     help_text='роля (ниво на достъп)')
-    session_theme = models.PositiveSmallIntegerField('Тема', default=1,
-                                                     validators=[MinValueValidator(1), MaxValueValidator(18) ],
-                                                     help_text='номер на тема от НИП по подразбиране')
 
     def __str__(self):
         return f'Потребител #{self.user.id}: {self.user.first_name} {self.user.last_name}'

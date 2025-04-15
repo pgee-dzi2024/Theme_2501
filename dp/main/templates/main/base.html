@@ -32,7 +32,7 @@
                                     <ul class="mainmenu">
                                     {% if user.is_authenticated %}
                                         <li><a href="{% url 'home' %}">Начало</a></li>
-                                        <li><a href="{% url 'home' %}">Виж/промени</a></li>
+                                        <li><a href="{% url 'edit' %}">Виж/промени</a></li>
                                         <li><a href="{% url 'logout' %}">Излез от системата</a></li>
                                     {% else %}
                                         <li><a href="{% url 'login' %}">Влез в системата</a></li>

@@ -11,21 +11,30 @@ from django.db import transaction
 
 def make_context(request):
     user = request.user
-    user_profile = user.userprofile
+    if user.is_authenticated:
+        user_profile = user.userprofile
 
-    context = {
-        'tab_title': 'начало',
-        'user_nick': user.username,
-        'user_name': user.first_name+' '+user.last_name,
-        'user_first_name': user.first_name,
-        'user_level': USER_LEVEL[user_profile.access_level-1][1],
-        'user_profile': user_profile,
-    }
+        context = {
+            'tab_title': 'начало',
+            'user_nick': user.username,
+            'user_name': user.first_name+' '+user.last_name,
+            'user_first_name': user.first_name,
+            'user_level': USER_LEVEL[user_profile.access_level-1][1],
+            'user_profile': user_profile,
+        }
+    else:
+        context = {
+            'tab_title': 'начало',
+        }
     return context
 
 
 def index(request):
     return render(request, 'main/index.html', make_context(request))
+
+
+def edit(request):
+    return render(request, 'main/edit.html', make_context(request))
 
 
 def signin(request):
