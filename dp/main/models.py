@@ -17,7 +17,7 @@ TEACHER = 2
 STUDENT = 3
 
 USER_LEVEL = [
-    (ADMIN, 'Системен администратор'),
+    (ADMIN, 'Администратор'),
     (TEACHER, 'УЧИТЕЛ'),
     (STUDENT, 'УЧЕНИК'),
 ]

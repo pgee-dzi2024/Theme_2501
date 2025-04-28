@@ -26,75 +26,88 @@
                     <div class="rbt-dashboard-content">
                         <div class="content-page">
                             <div class="chat-box-list pt--30">
-                                <form>
+                                <form method="POST" action="{% url 'edit' %}">
+                                    {% csrf_token %}
                                     <h5 class="title">
-                                        Потребител #{{ user.id }}</h5>
-                                    <!-- роля -->
+                                        Потребител #{{ user.id }}
+                                    </h5>
+
+                                    <!-- Роля -->
                                     <div class="row">
                                         <div class="form-group col-lg-6 col-md-6 col-sm-12 col-6"></div>
                                         <div class="custom-control col-lg-2 align-items-end">
                                             Роля:
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-12 col-6"></div>
-                                        <div class="custom-control custom-checkbox col-lg-2 align-items-end">
-                                            <input class="custom-control-input" id="editА" type="radio" name="r1">
-                                            <label class="custom-control-label d-flex align-items-center" for="editА">Администратор</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox col-lg-2 align-items-end">
-                                            <input class="custom-control-input" id="editT" type="radio" name="r1">
-                                            <label class="custom-control-label d-flex align-items-center" for="editT">Учител</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox col-lg-2 align-items-end">
-                                            <input class="custom-control-input" id="editS" type="radio" name="r1">
-                                            <label class="custom-control-label d-flex align-items-center" for="editS">Ученик</label>
-                                        </div>
+
+                                        <!-- Полетата за роля от Django form -->
+                                        {% for radio in profile_form.access_level %}
+                                            <div class="custom-control custom-checkbox col-lg-2 align-items-end">
+                                                {{ radio.tag }}
+                                                <label class="custom-control-label d-flex align-items-center" for="{{ radio.id_for_label }}">
+                                                    {{ radio.choice_label }}
+                                                </label>
+                                            </div>
+                                        {% endfor %}
                                     </div>
+
                                     <!-- Потребителско име -->
                                     <div class="row">
                                         <div class="form-group col-12">
-                                            <label for="editUserName">Потребителско име: </label>
-                                            <input type="text" class="form-control"
-                                                   id="editUserName" maxlength="20" size="20" v-model="c_user.username">
+                                            <label for="{{ user_form.username.id_for_label }}">Потребителско име:</label>
+                                            {{ user_form.username }}
+                                            {% if user_form.username.errors %}
+                                                <div class="text-danger">{{ user_form.username.errors }}</div>
+                                            {% endif %}
                                         </div>
                                     </div>
+
                                     <!-- Име и фамилия -->
                                     <div class="row">
                                         <div class="form-group col-lg-6 col-md-6 col-sm-12 col-6">
-                                            <label for="editFirstName">Име: </label>
-                                            <input type="text" class="form-control"
-                                                   id="editFirstName" maxlength="20" size="20" v-model="c_user.first_name">
+                                            <label for="{{ user_form.first_name.id_for_label }}">Име:</label>
+                                            {{ user_form.first_name }}
+                                            {% if user_form.first_name.errors %}
+                                                <div class="text-danger">{{ user_form.first_name.errors }}</div>
+                                            {% endif %}
                                         </div>
                                         <div class="form-group col-lg-6 col-md-6 col-sm-12 col-6">
-                                            <label for="editLastName">Фамилия: </label>
-                                            <input type="text" class="form-control"
-                                                   id="editLastName" maxlength="40" size="20" v-model="c_user.last_name">
+                                            <label for="{{ user_form.last_name.id_for_label }}">Фамилия:</label>
+                                            {{ user_form.last_name }}
+                                            {% if user_form.last_name.errors %}
+                                                <div class="text-danger">{{ user_form.last_name.errors }}</div>
+                                            {% endif %}
                                         </div>
                                     </div>
-                                    <!-- e-mail и пол -->
+
+                                    <!-- Е-мейл и пол -->
                                     <div class="row">
                                         <div class="form-group col-lg-6 col-md-6 col-sm-12 col-6">
-                                            <label for="editEmail">Електронна поща: </label>
-                                            <input type="email" class="form-control"
-                                                   id="editEmail" maxlength="40" size="20" v-model="c_user.email">
+                                            <label for="{{ user_form.email.id_for_label }}">Електронна поща:</label>
+                                            {{ user_form.email }}
+                                            {% if user_form.email.errors %}
+                                                <div class="text-danger">{{ user_form.email.errors }}</div>
+                                            {% endif %}
                                         </div>
                                         <div class="custom-control col-lg-2 align-items-end">
                                             Пол:
                                         </div>
-                                        <div class="custom-control custom-checkbox col-lg-2 align-items-end cb-ok-align">
-                                            <input class="custom-control-input" id="editGM" type="radio" name="a1">
-                                            <label class="custom-control-label d-flex align-items-center" for="editGM">мъж</label>
-                                        </div>
-                                        <div class="custom-control custom-checkbox col-lg-2 align-items-end cb-ok-align">
-                                            <input class="custom-control-input" id="editGF" type="radio" name="a1">
-                                            <label class="custom-control-label d-flex align-items-center" for="editGF">жена</label>
-                                        </div>
+                                        {% for radio in profile_form.gender %}
+                                            <div class="custom-control custom-checkbox col-lg-2 align-items-end cb-ok-align">
+                                                {{ radio.tag }}
+                                                <label class="custom-control-label d-flex align-items-center" for="{{ radio.id_for_label }}">
+                                                    {{ radio.choice_label }}
+                                                </label>
+                                            </div>
+                                        {% endfor %}
                                     </div>
-                                    <!-- footer - бутони за отказ/запис -->
+
+                                    <!-- Footer - бутон за запис -->
                                     <div class="row mt--20">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="text-align: center;">
                                             <div class="btn-grp">
-                                                <button class="react-btn btn-default btn-small btn-border bg-color-success">
-                                                   <i class="feather-check"></i><span>&nbsp;Запази</span>
+                                                <button type="submit" class="react-btn btn-default btn-small btn-border bg-color-success">
+                                                    <i class="feather-check"></i><span>&nbsp;Запази</span>
                                                 </button>
                                             </div>
                                         </div>

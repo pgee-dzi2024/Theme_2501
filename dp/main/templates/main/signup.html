@@ -14,56 +14,41 @@
         </div>
 
         <!-- Start Sign up Area  -->
-        <div class="signup-area rainbow-section-gapTop-big" data-black-overlay="2">
+        <div class="signup-area" data-black-overlay="2">
             <div class="sign-up-wrapper rainbow-section-gap">
                 <div class="sign-up-box bg-flashlight">
                     <div class="signup-box-top top-flashlight light-xl">
-                        <img class="boxed-logo-dark" src="{% static 'assets/images/logo/boxed-logo.png' %}" alt="sign-up logo">
-                        <img class="boxed-logo-light" src="{% static 'assets/images/logo/boxed-logo-light.png' %}" alt="sign-up logo">
+                        <img class="boxed-logo-dark" src="{% static 'assets/images/logo/logo_2.png' %}" alt="sign-up logo">
+                        <img class="boxed-logo-light" src="{% static 'assets/images/logo/logo_2.png' %}" alt="sign-up logo">
                     </div>
                     <div class="separator-animated animated-true"></div>
                     <div class="signup-box-bottom">
                         <div class="signup-box-content">
-                            <h4 class="title">Welcome Back!</h4>
-                            <div class="social-btn-grp">
-                                <a class="btn-default btn-border" href="#">
-                                    <span class="icon-left"><img src="{% static 'assets/images/sign-up/google.png' %}"
-                                            alt="Google Icon"></span>Login with Google
-                                </a>
-                                <a class="btn-default btn-border" href="#">
-                                    <span class="icon-left"><img src="{% static 'assets/images/sign-up/facebook.png' %}"
-                                            alt="Google Icon"></span>Login with Facebook
-                                </a>
-                            </div>
+                            <h4 class="title">Добре дошли!</h4>
                             <div class="text-social-area">
-                                <hr>
-                                <span>Or continue with</span>
-                                <hr>
+                                <hr style="width: 50%;">
+                                <span>Регистрирайте се</span>
+                                <hr style="width: 50%;">
                             </div>
                             <form>
                                 <div class="input-section mail-section">
                                     <div class="icon"><i class="feather-user"></i></div>
-                                    <input type="text" placeholder="Enter Your Name">
-                                </div>
-                                <div class="input-section mail-section">
-                                    <div class="icon"><i class="feather-mail"></i></div>
-                                    <input type="email" placeholder="Enter email address">
+                                    <input type="text" placeholder="Потребителско име">
                                 </div>
                                 <div class="input-section password-section">
                                     <div class="icon"><i class="feather-lock"></i></div>
-                                    <input type="password" placeholder="Create Password">
+                                    <input type="password" placeholder="Парола">
                                 </div>
                                 <div class="input-section password-section">
                                     <div class="icon"><i class="feather-lock"></i></div>
-                                    <input type="password" placeholder="Confirm Password">
+                                    <input type="password" placeholder="Потвърдете паролата">
                                 </div>
-                                <button type="submit" class="btn-default">Sign Up</button>
+                                <button type="submit" class="btn-default">Регистрирай</button>
                             </form>
                         </div>
                         <div class="signup-box-footer">
                             <div class="bottom-text">
-                                If you have an account <a class="btn-read-more" href="signin.html"><span>Sign
-                                        In</span></a>
+                                Вече сте регистрирани? <a class="btn-read-more" href="{% url 'login' %}"><span>Влезте</span></a>
                             </div>
                         </div>
                     </div>

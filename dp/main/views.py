@@ -33,8 +33,30 @@ def index(request):
     return render(request, 'main/index.html', make_context(request))
 
 
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .forms import UserEditForm, UserProfileEditForm
+
+@login_required
 def edit(request):
-    return render(request, 'main/edit.html', make_context(request))
+    if request.method == 'POST':
+        user_form = UserEditForm(request.POST, instance=request.user)
+        profile_form = UserProfileEditForm(request.POST, instance=request.user.userprofile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return redirect('profile_view')  # Пренасочване към профилна страница след успешно записване.
+    else:
+        user_form = UserEditForm(instance=request.user)
+        profile_form = UserProfileEditForm(instance=request.user.userprofile)
+
+    context = make_context(request) | {
+        'user_form': user_form,
+        'profile_form': profile_form,
+        'user': request.user
+    }
+    return render(request, 'main/edit.html', context)
 
 
 def signin(request):
