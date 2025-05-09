@@ -95,6 +95,7 @@ def logout_user(request):
     return redirect('home')
 
 
+
 def signup(request):
     return render(request, 'main/signup.html')
 
